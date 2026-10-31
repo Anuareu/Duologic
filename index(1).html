@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DUOLOGIC — Lógica Proposicional</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="min-h-screen flex flex-col">
+    <!-- Header -->
+    <header class="bg-indigo-600 text-white shadow-lg">
+        <div class="container mx-auto px-4 py-6">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="flex items-center mb-4 md:mb-0">
+                    <i class="fas fa-brain text-3xl mr-3"></i>
+                    <h1 class="text-2xl font-bold">Lógica Proposicional</h1>
+                </div>
+                <nav class="flex space-x-1 md:space-x-4">
+                    <button onclick="showTab('home')" class="tab-btn px-3 py-2 rounded-lg hover:bg-indigo-700 transition active:bg-indigo-800 font-medium">
+                        <i class="fas fa-home mr-2"></i>Início
+                    </button>
+                    <button onclick="showTab('lessons')" class="tab-btn px-3 py-2 rounded-lg hover:bg-indigo-700 transition active:bg-indigo-800 font-medium">
+                        <i class="fas fa-book mr-2"></i>Lições
+                    </button>
+                    <button onclick="showTab('exercises')" class="tab-btn px-3 py-2 rounded-lg hover:bg-indigo-700 transition active:bg-indigo-800 font-medium">
+                        <i class="fas fa-pen mr-2"></i>Exercícios
+                    </button>
+                    <button onclick="showTab('truth-tables')" class="tab-btn px-3 py-2 rounded-lg hover:bg-indigo-700 transition active:bg-indigo-800 font-medium">
+                        <i class="fas fa-table mr-2"></i>Tabelas-Verdade
+                    </button>
+                    <button onclick="showTab('competitive')" class="tab-btn px-3 py-2 rounded-lg hover:bg-indigo-700 transition active:bg-indigo-800 font-medium">
+                        <i class="fas fa-trophy mr-2"></i>Competitivo
+                    </button>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow container mx-auto px-4 py-8">
+        <!-- Home Tab -->
+        <div id="home" class="tab-content active">
+            <section class="text-center mb-12">
+                <h2 class="text-4xl font-bold text-gray-800 mb-4">Bem-vindo ao Aprendizado de Lógica Proposicional</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">Domine os fundamentos da lógica proposicional através de lições interativas, exercícios práticos e desafios competitivos.</p>
+            </section>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+                <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition">
+                    <div class="text-indigo-600 text-4xl mb-4">
+                        <i class="fas fa-book-open"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Lições Completas</h3>
+                    <p class="text-gray-600">11 lições cobrindo desde conceitos básicos até tópicos avançados de lógica proposicional.</p>
+                    <button onclick="showTab('lessons')" class="mt-4 bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition">Começar</button>
+                </div>
+
+                <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition">
+                    <div class="text-green-500 text-4xl mb-4">
+                        <i class="fas fa-pen-fancy"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Exercícios Práticos</h3>
+                    <p class="text-gray-600">Pratique com exercícios interativos que fornecem feedback imediato e dicas úteis.</p>
+                    <button onclick="showTab('exercises')" class="mt-4 bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition">Exercitar</button>
+                </div>
+
+                <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition">
+                    <div class="text-purple-600 text-4xl mb-4">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Modo Competitivo</h3>
+                    <p class="text-gray-600">Teste seus conhecimentos contra o relógio e ganhe conquistas por seu progresso.</p>
+                    <button onclick="showTab('competitive')" class="mt-4 bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition">Competir</button>
+                </div>
+            </div>
+
+            <section class="bg-white p-6 rounded-xl shadow-md">
+                <h3 class="text-2xl font-semibold mb-4 text-gray-800">Recursos Disponíveis</h3>
+                <ul class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <li class="flex items-start">
+                        <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                        <span class="text-gray-700">Gerador de <span class="glossary-term">Tabelas-Verdade<span class="glossary-tooltip">Tabela que mostra todos os valores lógicos possíveis para uma proposição</span></span> com suporte para múltiplos operadores</span>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                        <span class="text-gray-700">Sistema de <span class="glossary-term">Conquistas<span class="glossary-tooltip">Badges que você ganha ao completar certos objetivos</span></span> para acompanhar seu progresso</span>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                        <span class="text-gray-700">Glossário interativo com explicações de termos técnicos</span>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                        <span class="text-gray-700">Design responsivo que funciona em qualquer dispositivo</span>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                        <span class="text-gray-700">Exemplos práticos e aplicações da lógica no mundo real</span>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                        <span class="text-gray-700">Modo escuro para estudo noturno (em breve)</span>
+                    </li>
+                </ul>
+            </section>
+        </div>
+
+        <!-- Lessons Tab -->
+        <div id="lessons" class="tab-content">
+            <div class="flex flex-col md:flex-row gap-8">
+                <div class="md:w-1/4 bg-white p-4 rounded-xl shadow-md">
+                    <h3 class="text-xl font-semibold mb-4 text-gray-800">Lições</h3>
+                    <div class="space-y-2">
+                        <button onclick="showLesson(1)" class="w-full text-left p-2 rounded-lg hover:bg-gray-100 transition flex items-center">
+                            <span class="w-6 h-6 bg-indigo-100 text-indigo-800 rounded-full flex items-center justify-center mr-2">1</span>
+                            Introdução à Lógica
+                        </button>
+                        <button onclick="showLesson(2)" class="w-full text-left p-2 rounded-lg hover:bg-gray-100 transition flex items-center">
+                            <span class="w-6 h-6 bg-indigo-100 text-indigo-800 rounded-full flex items-center justify-center mr-2">2</span>
+                            Proposições Simples
+                        </button>
+                        <button onclick="showLesson(3)" class="w-full text-left p-2 rounded-lg hover:bg-gray-100 transition flex items-center">
+                            <span class="w-6 h-6 bg-indigo-100 text-indigo-800 rounded-full flex items-center justify-center mr-2">3</span>
+                            Negação (¬)
+                        </button>
+                        <button onclick="showLesson(4)" class="w-full text-left p-2 rounded-lg hover:bg-gray-100 transition flex items-center">
+                            <span class="w-6 h-6 bg-indigo-100 text-indigo-800 rounded-full flex items-center justify-center mr-2">4</span>
+                            Conjunção (∧)
+                        </button>
+                        <button onclick="showLesson(5)" class="w-full text-left p-2 rounded-lg hover:bg-gray-100 transition flex items-center">
+                            <span class="w-6 h-6 bg-indigo-100 text-indigo-800 rounded-full flex items-center justify-center mr-2">5</span>
+                            Disjunção (∨)
+                        </button>
+                        <button onclick="showLesson(6)" class="w-full text-left p-2 rounded-lg hover:bg-gray-100 transition flex items-center">
+                            <span class="w-6 h-6 bg-indigo-100 text-indigo-800 rounded-full flex items-center justify-center mr-2">6</span>
+                            Condicional (→)
+                        </button>
+                        <button onclick="showLesson(7)" class="w-full text-left p-2 rounded-lg hover:bg-gray-100 transition flex items-center">
+                            <span class="w-6 h-6 bg-indigo-100 text-indigo-800 rounded-full flex items-center justify-center mr-2">7</span>
+                            Bicondicional (↔)
+                        </button>
+                        <button onclick="showLesson(8)" class="w-full text-left p-2 rounded-lg hover:bg-gray-100 transition flex items-center">
+                            <span class="w-6 h-6 bg-indigo-100 text-indigo-800 rounded-full flex items-center justify-center mr-2">8</span>
+                            Tautologias e Contradições
+                        </button>
+                        <button onclick="showLesson(9)" class="w-full text-left p-2 rounded-lg hover:bg-gray-100 transition flex items-center">
+                            <span class="w-6 h-6 bg-indigo-100 text-indigo-800 rounded-full flex items-center justify-center mr-2">9</span>
+                            Equivalências Lógicas
+                        </button>
+                        <button onclick="showLesson(10)" class="w-full text-left p-2 rounded-lg hover:bg-gray-100 transition flex items-center">
+                            <span class="w-6 h-6 bg-indigo-100 text-indigo-800 rounded-full flex items-center justify-center mr-2">10</span>
+                            Argumentos Válidos
+                        </button>
+                        <button onclick="showLesson(11)" class="w-full text-left p-2 rounded-lg hover:bg-gray-100 transition flex items-center">
+                            <span class="w-6 h-6 bg-indigo-100 text-indigo-800 rounded-full flex items-center justify-center mr-2">11</span>
+                            Aplicações Práticas
+                        </button>
+                    </div>
+                </div>
+
+                <div class="md:w-3/4 bg-white p-6 rounded-xl shadow-md">
+                    <div id="lesson-content">
+                        <h2 class="text-2xl font-bold text-gray-800 mb-4">Selecione uma lição</h2>
+                        <p class="text-gray-600">Escolha uma lição no menu à esquerda para começar a aprender sobre lógica proposicional.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Exercises Tab -->
+        <div id="exercises" class="tab-content">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6">Exercícios de Lógica Proposicional</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                <div class="exercise-card bg-white p-6 rounded-xl shadow-md">
+                    <div class="flex items-center mb-4">
+                        <span class="w-8 h-8 bg-indigo-100 text-indigo-800 rounded-full flex items-center justify-center mr-3">1</span>
+                        <h3 class="text-lg font-semibold">Identificação de Proposições</h3>
+                    </div>
+                    <p class="text-gray-600 mb-4">Quais das seguintes sentenças são proposições lógicas?</p>
+                    <div class="space-y-3">
+                        <div class="flex items-center">
+                            <input type="checkbox" id="ex1-1" class="mr-2">
+                            <label for="ex1-1" class="cursor-pointer">O céu é azul.</label>
+                        </div>
+                        <div class="flex items-center">
+                            <input type="checkbox" id="ex1-2" class="mr-2">
+                            <label for="ex1-2" class="cursor-pointer">Que horas são?</label>
+                        </div>
+                        <div class="flex items-center">
+                            <input type="checkbox" id="ex1-3" class="mr-2">
+                            <label for="ex1-3" class="cursor-pointer">2 + 2 = 4</label>
+                        </div>
+                        <div class="flex items-center">
+                            <input type="checkbox" id="ex1-4" class="mr-2">
+                            <label for="ex1-4" class="cursor-pointer">Por favor, feche a porta.</label>
+                        </div>
+                    </div>
+                    <button onclick="checkExercise(1)" class="mt-4 bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition">Verificar</button>
+                    <div id="ex1-feedback" class="mt-3 hidden"></div>
+                </div>
+
+                <div class="exercise-card bg-white p-6 rounded-xl shadow-md">
+                    <div class="flex items-center mb-4">
+                        <span class="w-8 h-8 bg-green-100 text-green-800 rounded-full flex items-center justify-center mr-3">2</span>
+                        <h3 class="text-lg font-semibold">Valor de Verdade</h3>
+                    </div>
+                    <p class="text-gray-600 mb-4">Qual o valor de verdade da proposição: "Se 3 é par, então a lua é feita de queijo."?</p>
+                    <div class="space-y-3">
+                        <div class="flex items-center">
+                            <input type="radio" id="ex2-1" name="ex2" value="V" class="mr-2">
+                            <label for="ex2-1" class="cursor-pointer">Verdadeiro</label>
+                        </div>
+                        <div class="flex items-center">
+                            <input type="radio" id="ex2-2" name="ex2" value="F" class="mr-2">
+                            <label for="ex2-2" class="cursor-pointer">Falso</label>
+                        </div>
+                    </div>
+                    <button onclick="checkExercise(2)" class="mt-4 bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition">Verificar</button>
+                    <div id="ex2-feedback" class="mt-3 hidden"></div>
+                </div>
+
+                <div class="exercise-card bg-white p-6 rounded-xl shadow-md">
+                    <div class="flex items-center mb-4">
+                        <span class="w-8 h-8 bg-purple-100 text-purple-800 rounded-full flex items-center justify-center mr-3">3</span>
+                        <h3 class="text-lg font-semibold">Tabela-Verdade</h3>
+                    </div>
+                    <p class="text-gray-600 mb-4">Complete a tabela-verdade para a expressão ¬(p ∧ q):</p>
+                    <table class="truth-table mb-4">
+                        <thead>
+                            <tr>
+                                <th>p</th>
+                                <th>q</th>
+                                <th>p ∧ q</th>
+                                <th>¬(p ∧ q)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>V</td>
+                                <td>V</td>
+                                <td><input type="text" class="w-12 border rounded p-1 text-center" maxlength="1"></td>
+                                <td><input type="text" class="w-12 border rounded p-1 text-center" maxlength="1"></td>
+                            </tr>
+                            <tr>
+                                <td>V</td>
+                                <td>F</td>
+                                <td><input type="text" class="w-12 border rounded p-1 text-center" maxlength="1"></td>
+                                <td><input type="text" class="w-12 border rounded p-1 text-center" maxlength="1"></td>
+                            </tr>
+                            <tr>
+                                <td>F</td>
+                                <td>V</td>
+                                <td><input type="text" class="w-12 border rounded p-1 text-center" maxlength="1"></td>
+                                <td><input type="text" class="w-12 border rounded p-1 text-center" maxlength="1"></td>
+                            </tr>
+                            <tr>
+                                <td>F</td>
+                                <td>F</td>
+                                <td><input type="text" class="w-12 border rounded p-1 text-center" maxlength="1"></td>
+                                <td><input type="text" class="w-12 border rounded p-1 text-center" maxlength="1"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <button onclick="checkExercise(3)" class="mt-2 bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition">Verificar</button>
+                    <div id="ex3-feedback" class="mt-3 hidden"></div>
+                </div>
+
+                <div class="exercise-card bg-white p-6 rounded-xl shadow-md">
+                    <div class="flex items-center mb-4">
+                        <span class="w-8 h-8 bg-yellow-100 text-yellow-800 rounded-full flex items-center justify-center mr-3">4</span>
+                        <h3 class="text-lg font-semibold">Equivalência Lógica</h3>
+                    </div>
+                    <p class="text-gray-600 mb-4">Qual das seguintes é equivalente a ¬(p ∨ q)?</p>
+                    <div class="space-y-3">
+                        <div class="flex items-center">
+                            <input type="radio" id="ex4-1" name="ex4" value="a" class="mr-2">
+                            <label for="ex4-1" class="cursor-pointer">¬p ∧ ¬q</label>
+                        </div>
+                        <div class="flex items-center">
+                            <input type="radio" id="ex4-2" name="ex4" value="b" class="mr-2">
+                            <label for="ex4-2" class="cursor-pointer">¬p ∨ ¬q</label>
+                        </div>
+                        <div class="flex items-center">
+                            <input type="radio" id="ex4-3" name="ex4" value="c" class="mr-2">
+                            <label for="ex4-3" class="cursor-pointer">p ∧ q</label>
+                        </div>
+                        <div class="flex items-center">
+                            <input type="radio" id="ex4-4" name="ex4" value="d" class="mr-2">
+                            <label for="ex4-4" class="cursor-pointer">p ∨ q</label>
+                        </div>
+                    </div>
+                    <button onclick="checkExercise(4)" class="mt-4 bg-yellow-500 text-white px-4 py-2 rounded-lg hover:bg-yellow-600 transition">Verificar</button>
+                    <div id="ex4-feedback" class="mt-3 hidden"></div>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-xl shadow-md">
+                <h3 class="text-xl font-semibold mb-4">Dicas para Resolver Exercícios</h3>
+                <div class="space-y-4">
+                    <div class="flex items-start">
+                        <i class="fas fa-lightbulb text-yellow-500 mt-1 mr-3"></i>
+                        <div>
+                            <h4 class="font-medium">Proposições</h4>
+                            <p class="text-gray-600 text-sm">Lembre-se que uma proposição é uma sentença declarativa que pode ser verdadeira ou falsa, mas não ambas.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <i class="fas fa-lightbulb text-yellow-500 mt-1 mr-3"></i>
+                        <div>
+                            <h4 class="font-medium">Condicional</h4>
+                            <p class="text-gray-600 text-sm">A proposição "Se p então q" só é falsa quando p é verdadeiro e q é falso. Nos outros casos é verdadeira.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <i class="fas fa-lightbulb text-yellow-500 mt-1 mr-3"></i>
+                        <div>
+                            <h4 class="font-medium">Leis de De Morgan</h4>
+                            <p class="text-gray-600 text-sm">¬(p ∧ q) ≡ ¬p ∨ ¬q e ¬(p ∨ q) ≡ ¬p ∧ ¬q. Estas equivalências são muito úteis!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Truth Tables Tab -->
+        <div id="truth-tables" class="tab-content">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6">Gerador de Tabelas-Verdade</h2>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <div class="lg:col-span-2 bg-white p-6 rounded-xl shadow-md">
+                    <div class="mb-6">
+                        <label for="expression" class="block text-sm font-medium text-gray-700 mb-2">Expressão Lógica</label>
+                        <div class="flex">
+                            <input type="text" id="expression" placeholder="Ex: (p ∧ q) ∨ ¬r" class="flex-grow border border-gray-300 rounded-l-lg p-3 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+                            <button onclick="generateTruthTable()" class="bg-indigo-600 text-white px-4 rounded-r-lg hover:bg-indigo-700 transition">Gerar</button>
+                        </div>
+                        <p class="text-xs text-gray-500 mt-2">Use: p, q, r, etc. para variáveis. Operadores: ¬ (negação), ∧ (e), ∨ (ou), → (condicional), ↔ (bicondicional)</p>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Variáveis na Expressão</label>
+                        <div id="variables" class="flex flex-wrap gap-2">
+                            <!-- Variables will be added here by JavaScript -->
+                        </div>
+                    </div>
+                    
+                    <div id="truth-table-container" class="overflow-x-auto">
+                        <!-- Truth table will be generated here -->
+                        <p class="text-gray-500">Digite uma expressão lógica e clique em "Gerar" para ver a tabela-verdade.</p>
+                    </div>
+                </div>
+                
+                <div class="bg-white p-6 rounded-xl shadow-md">
+                    <h3 class="text-lg font-semibold mb-4">Como usar</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-start">
+                            <i class="fas fa-info-circle text-indigo-500 mt-1 mr-3"></i>
+                            <div>
+                                <h4 class="font-medium">Sintaxe Básica</h4>
+                                <p class="text-gray-600 text-sm">Use letras minúsculas para variáveis (p, q, r). Use parênteses para agrupar expressões.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <i class="fas fa-info-circle text-indigo-500 mt-1 mr-3"></i>
+                            <div>
+                                <h4 class="font-medium">Operadores Suportados</h4>
+                                <ul class="text-gray-600 text-sm list-disc pl-5">
+                                    <li>¬ ou ! para negação</li>
+                                    <li>∧ ou & para conjunção (E)</li>
+                                    <li>∨ ou | para disjunção (OU)</li>
+                                    <li>→ ou > para condicional</li>
+                                    <li>↔ ou = para bicondicional</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <i class="fas fa-info-circle text-indigo-500 mt-1 mr-3"></i>
+                            <div>
+                                <h4 class="font-medium">Exemplos</h4>
+                                <ul class="text-gray-600 text-sm list-disc pl-5">
+                                    <li>p ∧ q</li>
+                                    <li>¬(p ∨ q)</li>
+                                    <li>(p → q) ↔ (¬q → ¬p)</li>
+                                    <li>(p ∧ q) ∨ (r ∧ ¬s)</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-8">
+                        <h3 class="text-lg font-semibold mb-3">Expressões de Exemplo</h3>
+                        <div class="grid grid-cols-2 gap-3">
+                            <button onclick="loadExample('p ∧ q')" class="text-sm bg-gray-100 hover:bg-gray-200 p-2 rounded transition">p ∧ q</button>
+                            <button onclick="loadExample('p ∨ q')" class="text-sm bg-gray-100 hover:bg-gray-200 p-2 rounded transition">p ∨ q</button>
+                            <button onclick="loadExample('p → q')" class="text-sm bg-gray-100 hover:bg-gray-200 p-2 rounded transition">p → q</button>
+                            <button onclick="loadExample('¬(p ∧ q)')" class="text-sm bg-gray-100 hover:bg-gray-200 p-2 rounded transition">¬(p ∧ q)</button>
+                            <button onclick="loadExample('(p ∧ q) ∨ r')" class="text-sm bg-gray-100 hover:bg-gray-200 p-2 rounded transition">(p ∧ q) ∨ r</button>
+                            <button onclick="loadExample('p ↔ (q ∨ r)')" class="text-sm bg-gray-100 hover:bg-gray-200 p-2 rounded transition">p ↔ (q ∨ r)</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Competitive Tab -->
+        <div id="competitive" class="tab-content">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6">Modo Competitivo</h2>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <div class="lg:col-span-2 space-y-6">
+                    <div class="bg-white p-6 rounded-xl shadow-md">
+                        <div class="flex justify-between items-center mb-4">
+                            <h3 class="text-lg font-semibold">Desafio do Dia</h3>
+                            <span class="bg-indigo-100 text-indigo-800 text-xs font-medium px-2.5 py-0.5 rounded">Novo!</span>
+                        </div>
+                        <p class="text-gray-600 mb-4">Qual é a negação da proposição "Se chover, então eu levo o guarda-chuva"?</p>
+                        
+                        <div class="space-y-3 mb-4">
+                            <div class="flex items-center">
+                                <input type="radio" id="challenge-1" name="challenge" value="a" class="mr-2">
+                                <label for="challenge-1" class="cursor-pointer">Se não chover, então eu não levo o guarda-chuva</label>
+                            </div>
+                            <div class="flex items-center">
+                                <input type="radio" id="challenge-2" name="challenge" value="b" class="mr-2">
+                                <label for="challenge-2" class="cursor-pointer">Chove e eu não levo o guarda-chuva</label>
+                            </div>
+                            <div class="flex items-center">
+                                <input type="radio" id="challenge-3" name="challenge" value="c" class="mr-2">
+                                <label for="challenge-3" class="cursor-pointer">Não chove ou eu levo o guarda-chuva</label>
+                            </div>
+                            <div class="flex items-center">
+                                <input type="radio" id="challenge-4" name="challenge" value="d" class="mr-2">
+                                <label for="challenge-4" class="cursor-pointer">Eu levo o guarda-chuva e não chove</label>
+                            </div>
+                        </div>
+                        
+                        <div class="flex justify-between items-center">
+                            <div class="flex items-center text-sm text-gray-500">
+                                <i class="fas fa-clock mr-1"></i>
+                                <span>Tempo restante: <span id="timer">01:30</span></span>
+                            </div>
+                            <button onclick="submitChallenge()" class="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition">Enviar Resposta</button>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white p-6 rounded-xl shadow-md">
+                        <h3 class="text-lg font-semibold mb-4">Ranking</h3>
+                        <div class="overflow-x-auto">
+                            <table class="min-w-full divide-y divide-gray-200">
+                                <thead class="bg-gray-50">
+                                    <tr>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Posição</th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nome</th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Pontos</th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Desafios</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="bg-white divide-y divide-gray-200">
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <span class="bg-yellow-100 text-yellow-800 text-xs font-semibold px-2 py-1 rounded">1º</span>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Ana Silva</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">1,250</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">28</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <span class="bg-gray-100 text-gray-800 text-xs font-semibold px-2 py-1 rounded">2º</span>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Carlos Oliveira</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">1,120</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">25</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <span class="bg-amber-100 text-amber-800 text-xs font-semibold px-2 py-1 rounded">3º</span>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Você</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">980</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">20</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <span class="px-2 py-1 text-xs font-semibold">4º</span>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Maria Santos</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">850</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">18</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <span class="px-2 py-1 text-xs font-semibold">5º</span>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">João Pereira</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">720</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">15</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="space-y-6">
+                    <div class="bg-white p-6 rounded-xl shadow-md">
+                        <h3 class="text-lg font-semibold mb-4">Suas Conquistas</h3>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="badge flex flex-col items-center p-3 bg-indigo-50 rounded-lg">
+                                <div class="w-12 h-12 bg-indigo-100 rounded-full flex items-center justify-center mb-2">
+                                    <i class="fas fa-medal text-indigo-500 text-xl"></i>
+                                </div>
+                                <span class="text-xs font-medium text-center">Iniciante em Lógica</span>
+                            </div>
+                            <div class="badge flex flex-col items-center p-3 bg-green-50 rounded-lg">
+                                <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mb-2">
+                                    <i class="fas fa-star text-green-500 text-xl"></i>
+                                </div>
+                                <span class="text-xs font-medium text-center">5 Exercícios</span>
+                            </div>
+                            <div class="badge flex flex-col items-center p-3 bg-yellow-50 rounded-lg opacity-50">
+                                <div class="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center mb-2">
+                                    <i class="fas fa-bolt text-gray-400 text-xl"></i>
+                                </div>
+                                <span class="text-xs font-medium text-center text-gray-400">Rápido no Gatilho</span>
+                            </div>
+                            <div class="badge flex flex-col items-center p-3 bg-purple-50 rounded-lg opacity-50">
+                                <div class="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center mb-2">
+                                    <i class="fas fa-trophy text-gray-400 text-xl"></i>
+                                </div>
+                                <span class="text-xs font-medium text-center text-gray-400">Top 1</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white p-6 rounded-xl shadow-md">
+                        <h3 class="text-lg font-semibold mb-4">Estatísticas</h3>
+                        <div class="space-y-4">
+                            <div>
+                                <div class="flex justify-between text-sm mb-1">
+                                    <span class="font-medium">Exercícios Completos</span>
+                                    <span>12/50</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2">
+                                    <div class="bg-indigo-600 h-2 rounded-full" style="width: 24%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between text-sm mb-1">
+                                    <span class="font-medium">Lições Concluídas</span>
+                                    <span>4/11</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2">
+                                    <div class="bg-green-500 h-2 rounded-full" style="width: 36%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between text-sm mb-1">
+                                    <span class="font-medium">Taxa de Acerto</span>
+                                    <span>85%</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2">
+                                    <div class="bg-yellow-500 h-2 rounded-full" style="width: 85%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white p-6 rounded-xl shadow-md">
+                        <h3 class="text-lg font-semibold mb-4">Histórico de Desafios</h3>
+                        <div class="space-y-3">
+                            <div class="flex items-center justify-between p-2 hover:bg-gray-50 rounded">
+                                <div class="flex items-center">
+                                    <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center mr-3">
+                                        <i class="fas fa-check text-green-500 text-sm"></i>
+                                    </div>
+                                    <span class="text-sm">Negação de Condicional</span>
+                                </div>
+                                <span class="text-xs bg-green-100 text-green-800 px-2 py-1 rounded">+50 pts</span>
+                            </div>
+                            <div class="flex items-center justify-between p-2 hover:bg-gray-50 rounded">
+                                <div class="flex items-center">
+                                    <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center mr-3">
+                                        <i class="fas fa-check text-green-500 text-sm"></i>
+                                    </div>
+                                    <span class="text-sm">Tabela-Verdade</span>
+                                </div>
+                                <span class="text-xs bg-green-100 text-green-800 px-2 py-1 rounded">+30 pts</span>
+                            </div>
+                            <div class="flex items-center justify-between p-2 hover:bg-gray-50 rounded">
+                                <div class="flex items-center">
+                                    <div class="w-8 h-8 bg-red-100 rounded-full flex items-center justify-center mr-3">
+                                        <i class="fas fa-times text-red-500 text-sm"></i>
+                                    </div>
+                                    <span class="text-sm">Equivalência Lógica</span>
+                                </div>
+                                <span class="text-xs bg-red-100 text-red-800 px-2 py-1 rounded">-10 pts</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Lógica Proposicional</h3>
+                    <p class="text-gray-300">Um projeto para ajudar estudantes a aprenderem os fundamentos da lógica proposicional de forma interativa e divertida.</p>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Links Úteis</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-300 hover:text-white transition">Sobre o Projeto</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition">Termos de Uso</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition">Política de Privacidade</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Contato</h3>
+                    <p class="text-gray-300 mb-2">Dúvidas ou sugestões? Entre em contato conosco.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-300 hover:text-white transition"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-300 hover:text-white transition"><i class="fab fa-github"></i></a>
+                        <a href="#" class="text-gray-300 hover:text-white transition"><i class="fas fa-envelope"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-6 text-center text-gray-400">
+                <p>© 2026 DUOLOGIC. Projeto educacional de lógica proposicional.</p>
+            </div>
+        </div>
+    </footer>
+    <script src="app.js" defer></script>
+</body>
+</html>

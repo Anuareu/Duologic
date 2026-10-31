@@ -1,0 +1,115 @@
+:root {
+            --primary: #4F46E5;
+            --secondary: #10B981;
+            --dark: #1F2937;
+            --light: #F3F4F6;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F9FAFB;
+        }
+        
+        .glossary-term {
+            border-bottom: 1px dashed #4F46E5;
+            cursor: help;
+            position: relative;
+        }
+        
+        .glossary-tooltip {
+            visibility: hidden;
+            width: 200px;
+            background-color: var(--dark);
+            color: white;
+            text-align: center;
+            border-radius: 6px;
+            padding: 8px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .glossary-term:hover .glossary-tooltip {
+            visibility: visible;
+            opacity: 1;
+        }
+        
+        .badge {
+            transition: all 0.3s ease;
+        }
+        
+        .badge:hover {
+            transform: scale(1.1);
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .truth-table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        
+        .truth-table th, .truth-table td {
+            border: 1px solid #E5E7EB;
+            padding: 8px 12px;
+            text-align: center;
+        }
+        
+        .truth-table th {
+            background-color: #E5E7EB;
+        }
+        
+        .exercise-card {
+            transition: all 0.3s ease;
+        }
+        
+        .exercise-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+        
+        .correct-answer {
+            animation: pulseGreen 1s;
+        }
+        
+        @keyframes pulseGreen {
+            0% { background-color: #F0FDF4; }
+            50% { background-color: #D1FAE5; }
+            100% { background-color: #F0FDF4; }
+        }
+        
+        .wrong-answer {
+            animation: pulseRed 1s;
+        }
+        
+        @keyframes pulseRed {
+            0% { background-color: #FEF2F2; }
+            50% { background-color: #FECACA; }
+            100% { background-color: #FEF2F2; }
+        }
+
+
+/* Ajustes gerais e acessibilidade */
+html { scroll-behavior: smooth; }
+button { cursor: pointer; }
+button:disabled { cursor: not-allowed; opacity: .65; }
+button:focus-visible, input:focus-visible { outline: 3px solid #a5b4fc; outline-offset: 2px; }
+.tab-content { min-height: 20rem; }
+.truth-table input { max-width: 3.5rem; }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; scroll-behavior: auto !important; } }
