@@ -1,115 +1,327 @@
+/* =========================================================================
+   DUOLOGIC — styles.css
+   Estilos próprios + tema claro/escuro via variáveis CSS (WCAG 2.1 AA).
+   Observação: as cores de texto usadas junto às classes utilitárias do
+   Tailwind foram escolhidas nas escalas 600/700/800 sobre fundos 50/100,
+   garantindo contraste mínimo de 4.5:1 nos dois temas.
+   ========================================================================= */
+
 :root {
-            --primary: #4F46E5;
-            --secondary: #10B981;
-            --dark: #1F2937;
-            --light: #F3F4F6;
-        }
-        
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #F9FAFB;
-        }
-        
-        .glossary-term {
-            border-bottom: 1px dashed #4F46E5;
-            cursor: help;
-            position: relative;
-        }
-        
-        .glossary-tooltip {
-            visibility: hidden;
-            width: 200px;
-            background-color: var(--dark);
-            color: white;
-            text-align: center;
-            border-radius: 6px;
-            padding: 8px;
-            position: absolute;
-            z-index: 1;
-            bottom: 125%;
-            left: 50%;
-            transform: translateX(-50%);
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-        
-        .glossary-term:hover .glossary-tooltip {
-            visibility: visible;
-            opacity: 1;
-        }
-        
-        .badge {
-            transition: all 0.3s ease;
-        }
-        
-        .badge:hover {
-            transform: scale(1.1);
-        }
-        
-        .tab-content {
-            display: none;
-        }
-        
-        .tab-content.active {
-            display: block;
-            animation: fadeIn 0.5s;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        
-        .truth-table {
-            border-collapse: collapse;
-            width: 100%;
-        }
-        
-        .truth-table th, .truth-table td {
-            border: 1px solid #E5E7EB;
-            padding: 8px 12px;
-            text-align: center;
-        }
-        
-        .truth-table th {
-            background-color: #E5E7EB;
-        }
-        
-        .exercise-card {
-            transition: all 0.3s ease;
-        }
-        
-        .exercise-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-        }
-        
-        .correct-answer {
-            animation: pulseGreen 1s;
-        }
-        
-        @keyframes pulseGreen {
-            0% { background-color: #F0FDF4; }
-            50% { background-color: #D1FAE5; }
-            100% { background-color: #F0FDF4; }
-        }
-        
-        .wrong-answer {
-            animation: pulseRed 1s;
-        }
-        
-        @keyframes pulseRed {
-            0% { background-color: #FEF2F2; }
-            50% { background-color: #FECACA; }
-            100% { background-color: #FEF2F2; }
-        }
+    --primary: #4F46E5;
+    --secondary: #10B981;
+    --dark: #1F2937;
+    --light: #F3F4F6;
 
+    /* Paleta semântica do tema claro */
+    --bg-page: #F9FAFB;
+    --bg-surface: #FFFFFF;
+    --bg-raised: #F3F4F6;
+    --text-body: #374151;        /* contraste 9.8:1 sobre branco */
+    --text-strong: #111827;      /* contraste 17:1 sobre branco */
+    --text-muted: #4B5563;       /* contraste 7.6:1 sobre branco */
+    --border-soft: #E5E7EB;
+    --shadow-card: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
 
-/* Ajustes gerais e acessibilidade */
+/* Tema escuro: ativado pela classe .dark no <body>. */
+body.dark {
+    --bg-page: #111827;
+    --bg-surface: #1F2937;
+    --bg-raised: #374151;
+    --text-body: #E5E7EB;
+    --text-strong: #F9FAFB;
+    --text-muted: #D1D5DB;
+    --border-soft: #4B5563;
+    --shadow-card: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
+    color-scheme: dark;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-page);
+    color: var(--text-body);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* ---------- Remapeamento das classes utilitárias mais usadas ----------
+   Como o projeto usa Tailwind via CDN com classes fixas (text-gray-600,
+   bg-white etc.), sobrescrevemos aqui essas classes para respeitar o tema
+   escuro sem precisar reescrever todo o HTML. As regras vêm depois do
+   CDN apenas porque este arquivo é carregado em cascata normal e as
+   utilidades do Play CDN são injetadas antes dele em especificidade; por
+   segurança usamos !important nas trocas de cor dependentes de tema. */
+body.dark .bg-white { background-color: var(--bg-surface) !important; }
+body.dark .bg-gray-50 { background-color: var(--bg-raised) !important; }
+body.dark .bg-gray-100 { background-color: var(--bg-raised) !important; }
+body.dark .bg-indigo-50 { background-color: #312E81 !important; }
+body.dark .bg-blue-50 { background-color: #1E3A8A !important; }
+body.dark .bg-green-50 { background-color: #064E3B !important; }
+body.dark .bg-yellow-50 { background-color: #713F12 !important; }
+body.dark .bg-purple-50 { background-color: #581C87 !important; }
+body.dark .bg-red-50 { background-color: #7F1D1D !important; }
+body.dark .bg-green-100 { background-color: #065F46 !important; }
+body.dark .bg-red-100 { background-color: #991B1B !important; }
+body.dark .bg-indigo-100 { background-color: #3730A3 !important; }
+body.dark .bg-gray-200 { background-color: #4B5563 !important; }
+body.dark .bg-gray-800 { background-color: #0B1120 !important; }
+
+body.dark .text-gray-500 { color: var(--text-muted) !important; }
+body.dark .text-gray-600 { color: var(--text-body) !important; }
+body.dark .text-gray-700 { color: var(--text-body) !important; }
+body.dark .text-gray-800 { color: var(--text-strong) !important; }
+body.dark .text-gray-900 { color: var(--text-strong) !important; }
+body.dark .text-gray-400 { color: var(--text-muted) !important; }
+body.dark .text-blue-700 { color: #BFDBFE !important; }
+body.dark .text-blue-800 { color: #DBEAFE !important; }
+body.dark .text-green-700 { color: #A7F3D0 !important; }
+body.dark .text-green-800 { color: #A7F3D0 !important; }
+body.dark .text-red-700 { color: #FECACA !important; }
+body.dark .text-red-800 { color: #FECACA !important; }
+body.dark .text-red-600 { color: #FCA5A5 !important; }
+body.dark .text-green-600 { color: #6EE7B7 !important; }
+body.dark .text-amber-700 { color: #FCD34D !important; }
+body.dark .text-yellow-800 { color: #FDE68A !important; }
+body.dark .text-indigo-800 { color: #C7D2FE !important; }
+body.dark .text-purple-800 { color: #E9D5FF !important; }
+body.dark .hover\:bg-gray-50:hover { background-color: var(--bg-raised) !important; }
+body.dark .hover\:bg-gray-200:hover { background-color: #4B5563 !important; }
+
+body.dark input[type="text"],
+body.dark select {
+    background-color: var(--bg-raised);
+    color: var(--text-strong);
+    border-color: var(--border-soft);
+}
+
+/* ---------- Glossário interativo ---------- */
+.glossary-term {
+    border-bottom: 1px dashed var(--primary);
+    cursor: help;
+    position: relative;
+}
+
+/* Acessibilidade: tooltip também aparece ao receber foco por teclado. */
+.glossary-term:focus-visible .glossary-tooltip,
+.glossary-term:hover .glossary-tooltip {
+    visibility: visible;
+    opacity: 1;
+}
+
+.glossary-tooltip {
+    visibility: hidden;
+    width: 220px;
+    background-color: var(--dark);
+    color: #FFFFFF;
+    text-align: center;
+    border-radius: 6px;
+    padding: 8px;
+    position: absolute;
+    z-index: 10;
+    bottom: 125%;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    transition: opacity 0.3s;
+    font-size: 0.75rem;
+    line-height: 1.25rem;
+    font-weight: 400;
+}
+
+body.dark .glossary-tooltip {
+    background-color: #E5E7EB;
+    color: #111827;
+}
+
+/* ---------- Badges / conquistas ---------- */
+.badge {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.badge:hover {
+    transform: scale(1.05);
+}
+
+.badge-unlock-animation {
+    animation: badgePop 0.6s ease;
+}
+
+@keyframes badgePop {
+    0% { transform: scale(0.6); opacity: 0; }
+    60% { transform: scale(1.15); }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+/* Toast de conquista desbloqueada */
+.achievement-toast {
+    position: fixed;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    background-color: var(--bg-surface);
+    color: var(--text-strong);
+    border: 1px solid var(--border-soft);
+    border-left: 6px solid var(--secondary);
+    border-radius: 0.75rem;
+    padding: 0.9rem 1.2rem;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+    font-size: 0.875rem;
+    z-index: 60;
+    opacity: 0;
+    transform: translateY(1rem) scale(0.95);
+    pointer-events: none;
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    max-width: min(20rem, calc(100vw - 3rem));
+}
+
+.achievement-toast i {
+    font-size: 1.5rem;
+    color: var(--secondary);
+}
+
+.achievement-toast.show {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+/* ---------- Abas ---------- */
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+    animation: fadeIn 0.5s;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* ---------- Tabelas-verdade ---------- */
+.truth-table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.truth-table th,
+.truth-table td {
+    border: 1px solid var(--border-soft);
+    padding: 8px 12px;
+    text-align: center;
+    color: var(--text-body);
+}
+
+.truth-table th {
+    background-color: var(--bg-raised);
+    color: var(--text-strong);
+}
+
+/* ---------- Cartões de exercício ---------- */
+.exercise-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background-color: var(--bg-surface);
+}
+
+.exercise-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.15);
+}
+
+/* ---------- Feedback correto/incorreto ---------- */
+.correct-answer {
+    animation: pulseGreen 1s;
+}
+
+@keyframes pulseGreen {
+    0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.5); }
+    50% { box-shadow: 0 0 0 8px rgba(16, 185, 129, 0.25); }
+    100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+}
+
+.wrong-answer {
+    animation: pulseRed 1s;
+}
+
+@keyframes pulseRed {
+    0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.5); }
+    50% { box-shadow: 0 0 0 8px rgba(239, 68, 68, 0.25); }
+    100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+}
+
+/* ---------- Barra de progresso ---------- */
+.progress-track {
+    width: 100%;
+    height: 0.5rem;
+    background-color: var(--bg-raised);
+    border-radius: 9999px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    border-radius: 9999px;
+    transition: width 0.5s ease;
+}
+
+.progress-fill--indigo { background-color: var(--primary); }
+.progress-fill--green { background-color: var(--secondary); }
+.progress-fill--yellow { background-color: #D97706; } /* amber-600 p/ contraste no track claro */
+
+/* ---------- Ajustes gerais e acessibilidade ---------- */
 html { scroll-behavior: smooth; }
 button { cursor: pointer; }
 button:disabled { cursor: not-allowed; opacity: .65; }
-button:focus-visible, input:focus-visible { outline: 3px solid #a5b4fc; outline-offset: 2px; }
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+[tabindex]:focus-visible {
+    outline: 3px solid #A5B4FC;
+    outline-offset: 2px;
+}
+
+body.dark button:focus-visible,
+body.dark input:focus-visible,
+body.dark select:focus-visible,
+body.dark [tabindex]:focus-visible {
+    outline-color: #818CF8;
+}
+
 .tab-content { min-height: 20rem; }
 .truth-table input { max-width: 3.5rem; }
-@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; scroll-behavior: auto !important; } }
+
+/* Texto somente para leitores de tela (fallback caso o CDN falhe). */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+/* Movimento reduzido: todos os novos elementos (toast, barras, badges)
+   herdam esta regra e deixam de animar. */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* Responsividade mobile-first extra */
+@media (max-width: 640px) {
+    .achievement-toast {
+        left: 1rem;
+        right: 1rem;
+        bottom: 1rem;
+        max-width: none;
+    }
+}

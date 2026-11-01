@@ -18,21 +18,27 @@
                     <i class="fas fa-brain text-3xl mr-3"></i>
                     <h1 class="text-2xl font-bold">Lógica Proposicional</h1>
                 </div>
-                <nav class="flex space-x-1 md:space-x-4">
-                    <button onclick="showTab('home')" class="tab-btn px-3 py-2 rounded-lg hover:bg-indigo-700 transition active:bg-indigo-800 font-medium">
-                        <i class="fas fa-home mr-2"></i>Início
-                    </button>
-                    <button onclick="showTab('lessons')" class="tab-btn px-3 py-2 rounded-lg hover:bg-indigo-700 transition active:bg-indigo-800 font-medium">
-                        <i class="fas fa-book mr-2"></i>Lições
-                    </button>
-                    <button onclick="showTab('exercises')" class="tab-btn px-3 py-2 rounded-lg hover:bg-indigo-700 transition active:bg-indigo-800 font-medium">
-                        <i class="fas fa-pen mr-2"></i>Exercícios
-                    </button>
-                    <button onclick="showTab('truth-tables')" class="tab-btn px-3 py-2 rounded-lg hover:bg-indigo-700 transition active:bg-indigo-800 font-medium">
-                        <i class="fas fa-table mr-2"></i>Tabelas-Verdade
-                    </button>
-                    <button onclick="showTab('competitive')" class="tab-btn px-3 py-2 rounded-lg hover:bg-indigo-700 transition active:bg-indigo-800 font-medium">
-                        <i class="fas fa-trophy mr-2"></i>Competitivo
+                <nav class="flex flex-wrap gap-1 md:gap-2">
+                    <div role="tablist" aria-label="Navegação principal do DUOLOGIC" class="flex flex-wrap gap-1 md:gap-2">
+                        <button data-tab="home" class="tab-btn px-3 py-2 rounded-lg hover:bg-indigo-700 transition active:bg-indigo-800 font-medium" aria-current="page" aria-selected="true">
+                            <i class="fas fa-home mr-2" aria-hidden="true"></i>Início
+                        </button>
+                        <button data-tab="lessons" class="tab-btn px-3 py-2 rounded-lg hover:bg-indigo-700 transition active:bg-indigo-800 font-medium" aria-current="false" aria-selected="false" tabindex="-1">
+                            <i class="fas fa-book mr-2" aria-hidden="true"></i>Lições
+                        </button>
+                        <button data-tab="exercises" class="tab-btn px-3 py-2 rounded-lg hover:bg-indigo-700 transition active:bg-indigo-800 font-medium" aria-current="false" aria-selected="false" tabindex="-1">
+                            <i class="fas fa-pen mr-2" aria-hidden="true"></i>Exercícios
+                        </button>
+                        <button data-tab="truth-tables" class="tab-btn px-3 py-2 rounded-lg hover:bg-indigo-700 transition active:bg-indigo-800 font-medium" aria-current="false" aria-selected="false" tabindex="-1">
+                            <i class="fas fa-table mr-2" aria-hidden="true"></i>Tabelas-Verdade
+                        </button>
+                        <button data-tab="competitive" class="tab-btn px-3 py-2 rounded-lg hover:bg-indigo-700 transition active:bg-indigo-800 font-medium" aria-current="false" aria-selected="false" tabindex="-1">
+                            <i class="fas fa-trophy mr-2" aria-hidden="true"></i>Competitivo
+                        </button>
+                    </div>
+                    <!-- Botão de modo escuro (WCAG: rotulado, aria-pressed, ícone decorativo oculto) -->
+                    <button id="dark-mode-toggle" onclick="toggleDarkMode()" class="px-3 py-2 rounded-lg hover:bg-indigo-700 transition font-medium" aria-pressed="false" title="Ativar modo escuro">
+                        <i class="fas fa-moon mr-2" aria-hidden="true"></i><span class="sr-only">Alternar modo escuro</span>
                     </button>
                 </nav>
             </div>
@@ -110,55 +116,76 @@
 
         <!-- Lessons Tab -->
         <div id="lessons" class="tab-content">
+            <!-- Barra de progresso das lições (atualizada por renderProgressUI em app.js) -->
+            <div class="bg-white p-4 rounded-xl shadow-md mb-6">
+                <div class="flex justify-between items-center mb-2">
+                    <h3 class="text-sm font-semibold text-gray-800"><i class="fas fa-chart-line mr-2 text-indigo-600" aria-hidden="true"></i>Progresso do curso</h3>
+                    <span id="lesson-progress-label" class="text-sm text-gray-600">0/11 lições concluídas (0%)</span>
+                </div>
+                <div class="progress-track" role="progressbar" aria-label="Progresso das lições" aria-valuemin="0" aria-valuemax="11" aria-valuenow="0">
+                    <div id="lesson-progress-fill" class="progress-fill progress-fill--green" style="width: 0%"></div>
+                </div>
+            </div>
             <div class="flex flex-col md:flex-row gap-8">
                 <div class="md:w-1/4 bg-white p-4 rounded-xl shadow-md">
                     <h3 class="text-xl font-semibold mb-4 text-gray-800">Lições</h3>
-                    <div class="space-y-2">
-                        <button onclick="showLesson(1)" class="w-full text-left p-2 rounded-lg hover:bg-gray-100 transition flex items-center">
-                            <span class="w-6 h-6 bg-indigo-100 text-indigo-800 rounded-full flex items-center justify-center mr-2">1</span>
+                    <ul class="space-y-2 list-none p-0 m-0" aria-label="Lista de lições">
+                        <li><button onclick="showLesson(1)" class="w-full text-left p-2 rounded-lg hover:bg-gray-100 transition flex items-center">
+                            <span class="w-6 h-6 shrink-0 bg-indigo-100 text-indigo-800 rounded-full flex items-center justify-center mr-2">1</span>
                             Introdução à Lógica
-                        </button>
-                        <button onclick="showLesson(2)" class="w-full text-left p-2 rounded-lg hover:bg-gray-100 transition flex items-center">
-                            <span class="w-6 h-6 bg-indigo-100 text-indigo-800 rounded-full flex items-center justify-center mr-2">2</span>
+                            <span class="lesson-check ml-auto text-green-600" data-lesson="1" hidden aria-hidden="true"><i class="fas fa-circle-check"></i></span>
+                        </button></li>
+                        <li><button onclick="showLesson(2)" class="w-full text-left p-2 rounded-lg hover:bg-gray-100 transition flex items-center">
+                            <span class="w-6 h-6 shrink-0 bg-indigo-100 text-indigo-800 rounded-full flex items-center justify-center mr-2">2</span>
                             Proposições Simples
-                        </button>
-                        <button onclick="showLesson(3)" class="w-full text-left p-2 rounded-lg hover:bg-gray-100 transition flex items-center">
-                            <span class="w-6 h-6 bg-indigo-100 text-indigo-800 rounded-full flex items-center justify-center mr-2">3</span>
+                            <span class="lesson-check ml-auto text-green-600" data-lesson="2" hidden aria-hidden="true"><i class="fas fa-circle-check"></i></span>
+                        </button></li>
+                        <li><button onclick="showLesson(3)" class="w-full text-left p-2 rounded-lg hover:bg-gray-100 transition flex items-center">
+                            <span class="w-6 h-6 shrink-0 bg-indigo-100 text-indigo-800 rounded-full flex items-center justify-center mr-2">3</span>
                             Negação (¬)
-                        </button>
-                        <button onclick="showLesson(4)" class="w-full text-left p-2 rounded-lg hover:bg-gray-100 transition flex items-center">
-                            <span class="w-6 h-6 bg-indigo-100 text-indigo-800 rounded-full flex items-center justify-center mr-2">4</span>
+                            <span class="lesson-check ml-auto text-green-600" data-lesson="3" hidden aria-hidden="true"><i class="fas fa-circle-check"></i></span>
+                        </button></li>
+                        <li><button onclick="showLesson(4)" class="w-full text-left p-2 rounded-lg hover:bg-gray-100 transition flex items-center">
+                            <span class="w-6 h-6 shrink-0 bg-indigo-100 text-indigo-800 rounded-full flex items-center justify-center mr-2">4</span>
                             Conjunção (∧)
-                        </button>
-                        <button onclick="showLesson(5)" class="w-full text-left p-2 rounded-lg hover:bg-gray-100 transition flex items-center">
-                            <span class="w-6 h-6 bg-indigo-100 text-indigo-800 rounded-full flex items-center justify-center mr-2">5</span>
+                            <span class="lesson-check ml-auto text-green-600" data-lesson="4" hidden aria-hidden="true"><i class="fas fa-circle-check"></i></span>
+                        </button></li>
+                        <li><button onclick="showLesson(5)" class="w-full text-left p-2 rounded-lg hover:bg-gray-100 transition flex items-center">
+                            <span class="w-6 h-6 shrink-0 bg-indigo-100 text-indigo-800 rounded-full flex items-center justify-center mr-2">5</span>
                             Disjunção (∨)
-                        </button>
-                        <button onclick="showLesson(6)" class="w-full text-left p-2 rounded-lg hover:bg-gray-100 transition flex items-center">
-                            <span class="w-6 h-6 bg-indigo-100 text-indigo-800 rounded-full flex items-center justify-center mr-2">6</span>
+                            <span class="lesson-check ml-auto text-green-600" data-lesson="5" hidden aria-hidden="true"><i class="fas fa-circle-check"></i></span>
+                        </button></li>
+                        <li><button onclick="showLesson(6)" class="w-full text-left p-2 rounded-lg hover:bg-gray-100 transition flex items-center">
+                            <span class="w-6 h-6 shrink-0 bg-indigo-100 text-indigo-800 rounded-full flex items-center justify-center mr-2">6</span>
                             Condicional (→)
-                        </button>
-                        <button onclick="showLesson(7)" class="w-full text-left p-2 rounded-lg hover:bg-gray-100 transition flex items-center">
-                            <span class="w-6 h-6 bg-indigo-100 text-indigo-800 rounded-full flex items-center justify-center mr-2">7</span>
+                            <span class="lesson-check ml-auto text-green-600" data-lesson="6" hidden aria-hidden="true"><i class="fas fa-circle-check"></i></span>
+                        </button></li>
+                        <li><button onclick="showLesson(7)" class="w-full text-left p-2 rounded-lg hover:bg-gray-100 transition flex items-center">
+                            <span class="w-6 h-6 shrink-0 bg-indigo-100 text-indigo-800 rounded-full flex items-center justify-center mr-2">7</span>
                             Bicondicional (↔)
-                        </button>
-                        <button onclick="showLesson(8)" class="w-full text-left p-2 rounded-lg hover:bg-gray-100 transition flex items-center">
-                            <span class="w-6 h-6 bg-indigo-100 text-indigo-800 rounded-full flex items-center justify-center mr-2">8</span>
+                            <span class="lesson-check ml-auto text-green-600" data-lesson="7" hidden aria-hidden="true"><i class="fas fa-circle-check"></i></span>
+                        </button></li>
+                        <li><button onclick="showLesson(8)" class="w-full text-left p-2 rounded-lg hover:bg-gray-100 transition flex items-center">
+                            <span class="w-6 h-6 shrink-0 bg-indigo-100 text-indigo-800 rounded-full flex items-center justify-center mr-2">8</span>
                             Tautologias e Contradições
-                        </button>
-                        <button onclick="showLesson(9)" class="w-full text-left p-2 rounded-lg hover:bg-gray-100 transition flex items-center">
-                            <span class="w-6 h-6 bg-indigo-100 text-indigo-800 rounded-full flex items-center justify-center mr-2">9</span>
+                            <span class="lesson-check ml-auto text-green-600" data-lesson="8" hidden aria-hidden="true"><i class="fas fa-circle-check"></i></span>
+                        </button></li>
+                        <li><button onclick="showLesson(9)" class="w-full text-left p-2 rounded-lg hover:bg-gray-100 transition flex items-center">
+                            <span class="w-6 h-6 shrink-0 bg-indigo-100 text-indigo-800 rounded-full flex items-center justify-center mr-2">9</span>
                             Equivalências Lógicas
-                        </button>
-                        <button onclick="showLesson(10)" class="w-full text-left p-2 rounded-lg hover:bg-gray-100 transition flex items-center">
-                            <span class="w-6 h-6 bg-indigo-100 text-indigo-800 rounded-full flex items-center justify-center mr-2">10</span>
+                            <span class="lesson-check ml-auto text-green-600" data-lesson="9" hidden aria-hidden="true"><i class="fas fa-circle-check"></i></span>
+                        </button></li>
+                        <li><button onclick="showLesson(10)" class="w-full text-left p-2 rounded-lg hover:bg-gray-100 transition flex items-center">
+                            <span class="w-6 h-6 shrink-0 bg-indigo-100 text-indigo-800 rounded-full flex items-center justify-center mr-2">10</span>
                             Argumentos Válidos
-                        </button>
-                        <button onclick="showLesson(11)" class="w-full text-left p-2 rounded-lg hover:bg-gray-100 transition flex items-center">
-                            <span class="w-6 h-6 bg-indigo-100 text-indigo-800 rounded-full flex items-center justify-center mr-2">11</span>
+                            <span class="lesson-check ml-auto text-green-600" data-lesson="10" hidden aria-hidden="true"><i class="fas fa-circle-check"></i></span>
+                        </button></li>
+                        <li><button onclick="showLesson(11)" class="w-full text-left p-2 rounded-lg hover:bg-gray-100 transition flex items-center">
+                            <span class="w-6 h-6 shrink-0 bg-indigo-100 text-indigo-800 rounded-full flex items-center justify-center mr-2">11</span>
                             Aplicações Práticas
-                        </button>
-                    </div>
+                            <span class="lesson-check ml-auto text-green-600" data-lesson="11" hidden aria-hidden="true"><i class="fas fa-circle-check"></i></span>
+                        </button></li>
+                    </ul>
                 </div>
 
                 <div class="md:w-3/4 bg-white p-6 rounded-xl shadow-md">
